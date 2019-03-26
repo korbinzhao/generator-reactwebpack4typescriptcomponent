@@ -1,13 +1,10 @@
-var gulp = require('gulp');
+const { series, src, dest } = require('gulp');
 
-gulp.task('less', function(){
-  return gulp.src('src/*.less')
-    .pipe(gulp.dest('lib'))
-});
+function copyLess(cb) {
+  src('src/*.less')
+    .pipe(dest('lib'))
 
-gulp.task('stylus', function(){
-  return gulp.src('src/*.styl')
-  .pipe(gulp.dest('lib'))
-});
+  cb();
+}
 
-gulp.task('default', [ 'less', 'stylus' ]);
+exports.default = series(copyLess);
